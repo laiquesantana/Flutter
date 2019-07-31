@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -11,28 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.amber),
+        theme: ThemeData(primaryColor: Colors.teal),
         home: HomePage()
     );
   }
 
 
-}
-
-
-// todos os widgets possuem um método build que retorna os widegts responsaveis pela tela
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Hello Flutter"),
-          centerTitle: true, // centralizar titulo
-        ),
-        body: Container(
-          color: Colors.white,
-        ),
-      );
-  }
 }
