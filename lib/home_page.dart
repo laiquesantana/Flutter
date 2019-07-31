@@ -11,15 +11,27 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true, // centralizar titulo
       ),
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
+  _body(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size; // pega altura e largura da tela
+
     return Container(
-        color: Colors.white,
-        child: Center(
-          child: _button(),
+        height: size.height, // mecher na altura do container para poder afetar o crossAxisAligment
+        width: size.width, // mecher na altura do container para poder afetar o crossAxisAligment
+        color: Colors.yellow,
+        child: Row(
+          mainAxisSize: MainAxisSize.max, // padrão
+          mainAxisAlignment: MainAxisAlignment.center , //eixo principal, padrão start
+          crossAxisAlignment: CrossAxisAlignment.end, // alinhamento de uma lima ou coluna no eixo cruzado , padrão é center
+          children: <Widget>[
+            _button(),
+            _button(),
+            _button(),
+          ],
         ) //SizedBox.expand
         );
   }
