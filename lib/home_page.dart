@@ -1,5 +1,8 @@
 // todos os widgets possuem um método build que retorna os widegts responsaveis pela tela ( widget text)
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/page1.dart';
+import 'package:myapp/pages/page2.dart';
+import 'package:myapp/pages/page3.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -47,18 +50,37 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[_button(context,"ListViews"), _button(context,"Page2"), _button(context,"Page3")],
+              children: <Widget>[
+                _button(context,"ListViews",()=> _onClickNavigator(context,HelloPage1())),
+                _button(context,"Page2",()=> _onClickNavigator(context,HelloPage2())),
+                _button(context,"Page3",()=> _onClickNavigator(context,HelloPage3())),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[_button(context,"Snack"), _button(context,"Dialog"), _button(context,"Toast")],
+              children: <Widget>[_button(context,"Snack",_onClickSnack), _button(context,"Dialog",_onClickDialog), _button(context,"Toast",_onClickToast)],
             )
           ],
         );
   }
 
+  void _onClickNavigator(BuildContext context, Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return page;
+    })); // navegar de telas
+  }
 
-  _button(String msg, BuildContext context) {
+  _onClickSnack() {
+  }
+
+  _onClickDialog() {
+  }
+
+  _onClickToast() {
+  }
+
+
+  _button( BuildContext context,String msg, Function onPressedButton) {
     return RaisedButton(
         color: Colors.blueAccent,
         child: Text(
@@ -66,7 +88,8 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
 
-        onPressed: () => _onClickOk(context));
+        onPressed:onPressedButton,
+    );
   }
 
   _text() {
@@ -89,9 +112,9 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _onClickOk(BuildContext context) {
-    Navigator.push(context, route); // navegar de telas
-  }
+
+
+
 }
 
 
