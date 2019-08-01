@@ -1,8 +1,11 @@
 // todos os widgets possuem um método build que retorna os widegts responsaveis pela tela ( widget text)
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/hello_listview.dart';
 import 'package:myapp/pages/page1.dart';
 import 'package:myapp/pages/page2.dart';
 import 'package:myapp/pages/page3.dart';
+import 'package:myapp/utils/nav.dart';
+import 'package:myapp/widgets/blue_button.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -51,23 +54,26 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _button(context,"ListViews",()=> _onClickNavigator(context,HelloPage1())),
-                _button(context,"Page2",()=> _onClickNavigator(context,HelloPage2())),
-                _button(context,"Page3",()=> _onClickNavigator(context,HelloPage3())),
+                BlueButton("ListViews",onPressedButton: ()=> _onClickNavigator(context,HelloListView())),
+                BlueButton("Page2",onPressedButton: ()=> _onClickNavigator(context,HelloPage2())),
+                BlueButton("Page3",onPressedButton:()=> _onClickNavigator(context,HelloPage3())),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[_button(context,"Snack",_onClickSnack), _button(context,"Dialog",_onClickDialog), _button(context,"Toast",_onClickToast)],
+              children: <Widget>[
+                BlueButton("Snack",onPressedButton:_onClickSnack),
+                BlueButton("Dialog",onPressedButton:_onClickDialog),
+                BlueButton("Toast",onPressedButton:_onClickToast)],
             )
           ],
         );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return page;
-    })); // navegar de telas
+
+  void _onClickNavigator(BuildContext context, Widget page) async {
+      String s = await push(context, page);
+     print('=> $s');
   }
 
   _onClickSnack() {
@@ -80,17 +86,6 @@ class HomePage extends StatelessWidget {
   }
 
 
-  _button( BuildContext context,String msg, Function onPressedButton) {
-    return RaisedButton(
-        color: Colors.blueAccent,
-        child: Text(
-          msg,
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-
-        onPressed:onPressedButton,
-    );
-  }
 
   _text() {
     return Text("Hello World",
